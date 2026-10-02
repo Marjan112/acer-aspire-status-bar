@@ -70,7 +70,7 @@ int main()
     else if (percent < 20) color = "#ff0000";
     else color = "#478061";
 
-    printf("<span foreground='%s'>%s: %d</span>\n", color, ifname, percent);
+    printf("<span foreground='%s'>%s: %d</span>\n", color, ssid, percent);
 
     close(sock);
     freeifaddrs(ifaddr);
