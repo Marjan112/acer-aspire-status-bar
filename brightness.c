@@ -1,9 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
 int read_sysfs(const char *path)
 {
     FILE *f = fopen(path, "r");
+    if (!f) {
+        printf("brightness: %s: %s\n", path, strerror(errno));
+        exit(1); 
+    }
     int v;
     fscanf(f, "%d", &v);
     fclose(f);
