@@ -18,6 +18,6 @@ int main()
     float total_gib = (float)total_bytes / (1024 * 1024 * 1024);
     float free_gib = (float)free_bytes / (1024 * 1024 * 1024);
 
-    printf("Disk: %.1f/%.1f\n", total_gib - free_gib, total_gib);
+    printf("Disk: %.1f GiB/%.1f GiB\n", total_gib - free_gib, total_gib);
     return 0;
 }
