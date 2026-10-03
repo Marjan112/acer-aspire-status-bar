@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int main()
 {
@@ -9,6 +10,12 @@ int main()
         return 1;
     }
 
-    printf("Hot Loads: %.2f\n", loadavg);
+    int cores = sysconf(_SC_NPROCESSORS_ONLN);
+    if (cores < 0) {
+        perror("sysconf");
+        return 1;
+    }
+
+    printf("<span foreground='%s'>Load: %.2f</span>\n", loadavg >= cores ? "#ff0000" : "#ffffff", loadavg);
     return 0;
 }
