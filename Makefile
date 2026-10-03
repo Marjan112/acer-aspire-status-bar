@@ -12,7 +12,7 @@ all: $(BINS)
 	$(CC) -o $@ $< $(CFLAGS) $(LDLIBS)
 
 install: all
-	install $(BINS) ./config $(INSTALLPATH)
+	install $(BINS) config $(INSTALLPATH)
 
 clean:
 	rm -f $(BINS)
