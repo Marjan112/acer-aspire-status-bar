@@ -1,10 +1,10 @@
-[cpu_temp]
-command=./cpu_temp
+[cpu]
+command=./cpu
 markup=pango
 interval=1
 
-[ram_usage]
-command=./ram_usage
+[ram]
+command=./ram
 markup=pango
 interval=1
 
@@ -25,6 +25,11 @@ interval=60
 
 [wireless]
 command=./wireless
+markup=pango
+interval=1
+
+[battery]
+command=./battery
 markup=pango
 interval=1
 

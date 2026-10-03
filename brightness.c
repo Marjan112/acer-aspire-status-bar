@@ -1,25 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
-int read_sysfs(const char *path)
-{
-    FILE *f = fopen(path, "r");
-    if (!f) {
-        printf("brightness: %s: %s\n", path, strerror(errno));
-        exit(1); 
-    }
-    int v;
-    fscanf(f, "%d", &v);
-    fclose(f);
-    return v; 
-}
+#include "sysfs.h"
 
 int main()
 {
-    int max_brightness = read_sysfs("/sys/class/backlight/intel_backlight/max_brightness");
-    int brightness = read_sysfs("/sys/class/backlight/intel_backlight/brightness");
+    int max_brightness = read_sysfs_int("/sys/class/backlight/intel_backlight/max_brightness");
+    int brightness = read_sysfs_int("/sys/class/backlight/intel_backlight/brightness");
 
     int percent = brightness * 100 / max_brightness;
 
