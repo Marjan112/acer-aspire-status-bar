@@ -19,7 +19,7 @@ int main()
     const char *ifprefix = "wl";
     const size_t ifprefix_len = strlen(ifprefix);
 
-    char ifname[IFNAMSIZ];
+    char ifname[IFNAMSIZ] = {0};
 
     for (struct ifaddrs *ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
         if (ifa->ifa_addr == NULL) continue;
@@ -27,6 +27,11 @@ int main()
             strncpy(ifname, ifa->ifa_name, strlen(ifa->ifa_name));
             break;
         }
+    }
+
+    if (*ifname == '\0') {
+        puts("<span foreground='#ff0000'>W: No interface</span>");
+        return 1;
     }
 
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
@@ -52,7 +57,6 @@ int main()
     struct iw_statistics stats;
     iw.u.data.pointer = &stats;
     iw.u.data.length = sizeof(stats);
-    iw.u.data.flags = 1;
 
     if (ioctl(sock, SIOCGIWSTATS, &iw) < 0) {
         printf("<span foreground='#ff0000'>W: %s</span>\n", strerror(errno));
